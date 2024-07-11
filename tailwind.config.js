@@ -9,6 +9,10 @@ module.exports = {
   ],
   prefix: "",
   theme: {
+    // colors: {
+    //   basic: "#107a8b",
+    //   danger: "#ff304f",
+    // },
     fontFamily: {
       sans: ["Montserrat", " sans-serif"],
       headings: ["Roboto", " sans-serif"],
@@ -22,6 +26,8 @@ module.exports = {
     },
     extend: {
       colors: {
+        basic: "#107a8b",
+      danger: "#ff304f",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
