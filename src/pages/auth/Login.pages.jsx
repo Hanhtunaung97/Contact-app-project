@@ -14,14 +14,20 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ErrorMessage, Form, Formik } from "formik";
 import * as yup from "yup";
+import { useSignInMutation } from "../../store/services/Endpoints/auth.Endpoints";
 
 const LoginPages = () => {
+  const [loginFun, { isLoading, isError, isSuccess, data }] =
+    useSignInMutation();
+  console.log({ isLoading, isError, isSuccess, data });
   const initialValue = {
     email: "",
     password: "",
   };
-  const handleSubmit = (values) => {
-    console.log(values);
+  const handleSubmit = async (values) => {
+    // console.log(values);
+    const res = await loginFun(values);
+    console.log(res);
   };
   const validationSchema = yup.object({
     email: yup

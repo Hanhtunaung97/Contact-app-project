@@ -14,16 +14,21 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ErrorMessage, Form, Formik } from "formik";
 import * as yup from "yup";
+import { useSignUpMutation } from "../../store/services/Endpoints/auth.Endpoints";
 
 const RegisterPages = () => {
+  const [regFun, { isLoading, isError, isSuccess, data }] = useSignUpMutation();
+  console.log({ isLoading, isError, isSuccess, data });
   const initialValue = {
     name: "",
     email: "",
     password: "",
     password_confirmation: "",
   };
-  const handleSubmit = (values) => {
-    console.log(values);
+  const handleSubmit = async (values) => {
+    // console.log(values);
+    const res = await regFun(values);
+    console.log(res);
   };
   const validationSchema = yup.object({
     name: yup
