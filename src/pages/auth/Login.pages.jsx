@@ -26,12 +26,12 @@ const LoginPages = () => {
   const validationSchema = yup.object({
     email: yup
       .string()
-      .required("email required")
+      .required("Email is required")
       .email("Invalid email address"),
     password: yup
       .string()
-      .required("password required")
-      .min(8, "Password must ber longer than 8 letters"),
+      .required("Password is required")
+      .min(8, "Password must be longer than 8 letters"),
   });
   return (
     <ContainerComponents>
