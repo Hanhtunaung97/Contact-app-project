@@ -2,7 +2,7 @@ import React from 'react'
 
 const LoadingComponents = () => {
   return (
-    <div className=" flex justify-center items-center">
+    <div className=" flex justify-center items-center min-h-screen">
     <div className=" h-full">
       <h1 className="text-3xl font-bold font-heading text-basic mb-0 lg:mb-3 flex justify-center items-center">
         Loading.....

@@ -5,4 +5,6 @@ export { default as ErrorComponents } from "./support/Error.components";
 // nav
 export { default as NavComponents } from "./nav/Nav.components";
 // empty
-export {default as EmptyComponents} from "./lottieComponents/Empty.components"
+export { default as EmptyComponents } from "./lottieComponents/Empty.components";
+// auth
+export { default as AuthGuard } from "./guard/Auth.guard";
