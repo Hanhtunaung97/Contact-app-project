@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   ContainerComponents,
   ErrorComponents,
@@ -13,16 +13,21 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { ToastAction } from "@/components/ui/toast";
+import { useToast } from "@/components/ui/use-toast";
+import { Toaster } from "@/components/ui/toaster";
 import { Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ErrorMessage, Form, Formik } from "formik";
 import * as yup from "yup";
 import { useSignUpMutation } from "../../store/services/Endpoints/auth.Endpoints";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const RegisterPages = () => {
-  const [regFun,data] = useSignUpMutation();
+  const nav = useNavigate();
+  const { toast } = useToast();
+  const [regFun, data] = useSignUpMutation();
   const initialValue = {
     name: "",
     email: "",
@@ -54,7 +59,22 @@ const RegisterPages = () => {
         "Confirm password must be same your password"
       ),
   });
-  console.log(data);
+  useEffect(() => {
+    console.log(data);
+    if (data.error) {
+      const msg = data.error.data.message;
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: msg,
+        action: (
+          <ToastAction onClick={() => nav("/")} altText="Sign In">
+            Sign In
+          </ToastAction>
+        ),
+      });
+    }
+  }, [data]);
   return (
     <ContainerComponents>
       {data.isLoading ? (
@@ -62,7 +82,10 @@ const RegisterPages = () => {
       ) : (
         <>
           {data.isError ? (
-            <ErrorComponents />
+            <>
+              <ErrorComponents />
+              <Toaster />
+            </>
           ) : (
             <Card className=" basis-1/2">
               <CardHeader className="flex-row justify-between items-center text-basic">

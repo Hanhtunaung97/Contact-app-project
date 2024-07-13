@@ -32,7 +32,6 @@ const LoginPages = () => {
   const handleSubmit = async (values) => {
     // console.log(values);
     const res = await loginFun(values);
-    console.log(res);
   };
   const validationSchema = yup.object({
     email: yup
@@ -51,7 +50,7 @@ const LoginPages = () => {
       ) : (
         <>
           {isError ? (
-            <ErrorComponents>{isError.message}</ErrorComponents>
+            <ErrorComponents/>
           ) : (
             <Card className=" basis-1/2">
               <CardHeader className="flex-row justify-between items-center text-basic">
