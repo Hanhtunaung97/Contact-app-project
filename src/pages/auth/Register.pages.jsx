@@ -73,6 +73,8 @@ const RegisterPages = () => {
           </ToastAction>
         ),
       });
+    } else if (data.data) {
+      nav("/");
     }
   }, [data]);
   return (
