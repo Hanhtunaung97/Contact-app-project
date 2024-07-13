@@ -22,8 +22,7 @@ import { useSignUpMutation } from "../../store/services/Endpoints/auth.Endpoints
 import { Link } from "react-router-dom";
 
 const RegisterPages = () => {
-  const [regFun, { isLoading, isError, isSuccess, data }] = useSignUpMutation();
-  console.log({ isLoading, isError, isSuccess, data });
+  const [regFun,data] = useSignUpMutation();
   const initialValue = {
     name: "",
     email: "",
@@ -33,7 +32,6 @@ const RegisterPages = () => {
   const handleSubmit = async (values) => {
     // console.log(values);
     const res = await regFun(values);
-    console.log(res);
   };
   const validationSchema = yup.object({
     name: yup
@@ -56,14 +54,15 @@ const RegisterPages = () => {
         "Confirm password must be same your password"
       ),
   });
+  console.log(data);
   return (
     <ContainerComponents>
-      {isLoading ? (
+      {data.isLoading ? (
         <LoadingComponents />
       ) : (
         <>
-          {isError ? (
-            <ErrorComponents>{isError.message}</ErrorComponents>
+          {data.isError ? (
+            <ErrorComponents />
           ) : (
             <Card className=" basis-1/2">
               <CardHeader className="flex-row justify-between items-center text-basic">
