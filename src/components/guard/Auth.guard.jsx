@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useProfileQuery } from "../../store/services/Endpoints/auth.Endpoints";
 import { useNavigate } from "react-router-dom";
-import LoadingComponents from "../support/Loading.components";
+import LoadingComponents from "../tools/Loading.components";
 
 const AuthGuard = ({ check, token, children }) => {
   const nav = useNavigate();
