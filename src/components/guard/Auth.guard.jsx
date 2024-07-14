@@ -11,7 +11,7 @@ const AuthGuard = ({ check, token, children }) => {
     if (check) {
       localStorage.setItem("token", JSON.stringify(token));
     } else if (data?.success) {
-      nav("/home");
+      nav("/home ");
     } else if (isError) {
       nav("/");
     }
