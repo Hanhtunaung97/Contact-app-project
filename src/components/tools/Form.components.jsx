@@ -1,13 +1,14 @@
 import { Form, Formik, ErrorMessage } from "formik";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import * as yup from "yup";
+import { SheetClose } from "@/components/ui/sheet";
 import { useCreateContactMutation } from "../../store/services/Endpoints/contact.Endpoints";
 const FormComponents = () => {
-  const [addFun,data]=useCreateContactMutation()
+  const [addFun, data] = useCreateContactMutation();
   const initialValue = {
     name: "",
     email: "",
@@ -30,13 +31,13 @@ const FormComponents = () => {
       .max(13, "Phone number should not be longer than 13 digits"),
     address: yup.string().required("Address is required"),
   });
-  const handleSubmit =async (values) => {
+  const handleSubmit = async (values) => {
     console.log(values);
     await addFun(values);
   };
-useEffect(() => {
-  console.log(data);
-},[data])
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
   return (
     <div>
       <Formik
@@ -123,14 +124,16 @@ useEffect(() => {
                   />
                 </div>
                 <div className=" mt-5 flex justify-between items-center">
-                  <Button
-                    type="submit"
-                    onClick={handleReset}
-                    variant="outline"
-                    className=" w-auto bg-white text-basic border border-basic hover:bg-basic hover:text-white  duration-300 active:scale-95"
-                  >
-                    Cancel
-                  </Button>
+                  <SheetClose asChild>
+                    <Button
+                      type="button"
+                      // onClick={handleReset}
+                      variant="outline"
+                      className=" w-auto bg-white text-basic border hover:border-0 border-basic hover:bg-basic hover:text-white  duration-300 active:scale-95"
+                    >
+                      Cancel
+                    </Button>
+                  </SheetClose>
                   <Button
                     type="submit"
                     disabled={isSubmitting}
