@@ -1,11 +1,13 @@
 import { Form, Formik, ErrorMessage } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import * as yup from "yup";
+import { useCreateContactMutation } from "../../store/services/Endpoints/contact.Endpoints";
 const FormComponents = () => {
+  const [addFun,data]=useCreateContactMutation()
   const initialValue = {
     name: "",
     email: "",
@@ -25,13 +27,16 @@ const FormComponents = () => {
       .string()
       .required("Phone number is required")
       .min(9, "Phone number must be at least 9 digits")
-      .max(11, "Phone number must be at least 9 digits"),
+      .max(13, "Phone number should not be longer than 13 digits"),
     address: yup.string().required("Address is required"),
   });
-  const handleSubmit = (values) => {
+  const handleSubmit =async (values) => {
     console.log(values);
+    await addFun(values);
   };
-
+useEffect(() => {
+  console.log(data);
+},[data])
   return (
     <div>
       <Formik

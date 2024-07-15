@@ -10,3 +10,5 @@ export { default as EmptyComponents } from "./lottieComponents/Empty.components"
 export { default as AuthGuard } from "./guard/Auth.guard";
 // form
 export { default as FormComponents } from "./tools/Form.components";
+// dataTable
+export { default as DataTableComponents } from "./tools/DataTable.components";

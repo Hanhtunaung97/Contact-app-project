@@ -1,6 +1,7 @@
 import React from "react";
 import {
   AuthGuard,
+  DataTableComponents,
   EmptyComponents,
   ErrorComponents,
   FormComponents,
@@ -36,7 +37,7 @@ const HomePages = () => {
             <ErrorComponents />
           ) : (
             <Sheet>
-              <div className=" bg-slate-50">
+              <div className=" bg-slate-50 h-full">
                 <NavComponents />
                 <div className=" h-16"></div>
                 <div className=" container mx-auto flex flex-col  gap-y-5">
@@ -49,7 +50,7 @@ const HomePages = () => {
                     </SheetTrigger>
                   </div>
                   {contactsData.length !== 0 ? (
-                    <h1>hello</h1>
+                    <DataTableComponents data={contactsData}/>
                   ) : (
                     <div className=" h-[600px] bg-white shadow rounded-lg flex flex-col gap-y-3 justify-center items-center">
                       <EmptyComponents />
