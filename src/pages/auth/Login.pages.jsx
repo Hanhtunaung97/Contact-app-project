@@ -21,8 +21,11 @@ import { ErrorMessage, Form, Formik } from "formik";
 import * as yup from "yup";
 import { useSignInMutation } from "../../store/services/Endpoints/auth.Endpoints";
 import { Link, useNavigate } from "react-router-dom";
-
+import { ToastAction } from "@/components/ui/toast";
+import { useToast } from "@/components/ui/use-toast";
+import { Toaster } from "@/components/ui/toaster";
 const LoginPages = () => {
+  const { toast } = useToast();
   const nav = useNavigate();
   const [loginFun, data] = useSignInMutation();
   const initialValue = {
@@ -47,6 +50,19 @@ const LoginPages = () => {
     // console.log(data);
     if (data?.data?.success) {
       nav("/home");
+    } else {
+      console.log(data?.data);
+      const msg = data?.data?.message;
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: msg,
+        action: (
+          <ToastAction onClick={() => nav("/register")} altText="Sign Up">
+            Sign Up
+          </ToastAction>
+        ),
+      });
     }
   }, [data]);
   return (
@@ -56,8 +72,11 @@ const LoginPages = () => {
           <LoadingComponents />
         ) : (
           <>
-            {data.isError ? (
+            {data?.data?.success == false ? (
+              <>
               <ErrorComponents />
+              <Toaster/>
+              </>
             ) : (
               <Card className=" basis-1/2">
                 <CardHeader className="flex-row justify-between items-center text-basic">
