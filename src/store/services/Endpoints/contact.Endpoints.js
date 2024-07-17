@@ -8,14 +8,23 @@ const contactEndpoints = apiServices.injectEndpoints({
         method: "POST",
         body: formData,
       }),
+      invalidatesTags:["contact"]
     }),
     getAllContacts: builder.query({
       query: () => ({
         url: `/contact`,
         method: "GET",
       }),
+      providesTags:["contact"]
+    }),
+    deleteContact: builder.mutation({
+      query: (id) => ({
+        url: `/contact/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags:["contact"]
     }),
   }),
 });
-export const { useCreateContactMutation, useGetAllContactsQuery } =
+export const { useCreateContactMutation, useGetAllContactsQuery,useDeleteContactMutation } =
   contactEndpoints;

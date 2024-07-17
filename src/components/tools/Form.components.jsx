@@ -9,6 +9,7 @@ import { SheetClose } from "@/components/ui/sheet";
 import { useCreateContactMutation } from "../../store/services/Endpoints/contact.Endpoints";
 const FormComponents = () => {
   const [addFun, data] = useCreateContactMutation();
+  const closeRef = useRef();
   const initialValue = {
     name: "",
     email: "",
@@ -34,6 +35,7 @@ const FormComponents = () => {
   const handleSubmit = async (values) => {
     console.log(values);
     await addFun(values);
+    closeRef.current.click();
   };
   useEffect(() => {
     console.log(data);
@@ -124,7 +126,7 @@ const FormComponents = () => {
                   />
                 </div>
                 <div className=" mt-5 flex justify-between items-center">
-                  <SheetClose asChild>
+                  <SheetClose asChild ref={closeRef}>
                     <Button
                       type="button"
                       // onClick={handleReset}
