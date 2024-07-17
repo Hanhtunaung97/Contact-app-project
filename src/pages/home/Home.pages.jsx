@@ -62,7 +62,7 @@ const HomePages = () => {
                       </Button>
                     </SheetTrigger>
                   </div>
-                  {contactsData.length !== 0 ? (
+                  {contactsData?.length !== 0 ? (
                     <DataTableComponents
                       data={contactsData}
                       editFunction={editFunction}

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import {
+  AuthGuard,
   ContainerComponents,
   ErrorComponents,
   LoadingComponents,
@@ -78,7 +79,8 @@ const RegisterPages = () => {
     }
   }, [data]);
   return (
-    <ContainerComponents>
+   <AuthGuard path="/register">
+     <ContainerComponents>
       {data.isLoading ? (
         <LoadingComponents />
       ) : (
@@ -203,6 +205,7 @@ const RegisterPages = () => {
         </>
       )}
     </ContainerComponents>
+   </AuthGuard>
   );
 };
 

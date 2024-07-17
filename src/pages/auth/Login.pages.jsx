@@ -24,6 +24,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/use-toast";
 import { Toaster } from "@/components/ui/toaster";
+
 const LoginPages = () => {
   const { toast } = useToast();
   const nav = useNavigate();
@@ -50,8 +51,8 @@ const LoginPages = () => {
     // console.log(data);
     if (data?.data?.success) {
       nav("/home");
-    } else {
-      console.log(data?.data);
+    } else if (data?.data?.success == false) {
+      // console.log(data?.data);
       const msg = data?.data?.message;
       toast({
         variant: "destructive",
@@ -74,8 +75,8 @@ const LoginPages = () => {
           <>
             {data?.data?.success == false ? (
               <>
-              <ErrorComponents />
-              <Toaster/>
+                <ErrorComponents />
+                <Toaster />
               </>
             ) : (
               <Card className=" basis-1/2">

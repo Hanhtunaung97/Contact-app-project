@@ -78,7 +78,7 @@ const DataTableComponents = ({ data, editFunction }) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.map((el) => (
+          {data?.map((el) => (
             <TableRow key={el.id} className="hover:bg-teal-50 border-0">
               <TableCell className="font-medium">{el.id}</TableCell>
               <TableCell className="font-medium">{el.name}</TableCell>
