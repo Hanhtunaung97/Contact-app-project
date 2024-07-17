@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AuthGuard,
   DataTableComponents,
@@ -25,8 +25,21 @@ import { useGetAllContactsQuery } from "../../store/services/Endpoints/contact.E
 
 const HomePages = () => {
   const { isLoading, isError, isSuccess, data } = useGetAllContactsQuery();
-  console.log(isLoading, isError, isSuccess, data);
+  // console.log(isLoading, isError, isSuccess, data);
+  const [editData, setEditData] = useState({
+    edit: false,
+    upData: null,
+  });
   const contactsData = data?.contacts?.data;
+  const editFunction = (id) => {
+    const contactsData = data?.contacts?.data;
+    const finder = contactsData?.find((el) => el.id === id);
+    console.log(finder);
+    setEditData({ edit: true, upData: finder });
+  };
+  const handleEditForm=() => {
+    setEditData({edit:false,upData:null})
+  }
   return (
     <AuthGuard>
       {isLoading ? (
@@ -50,7 +63,10 @@ const HomePages = () => {
                     </SheetTrigger>
                   </div>
                   {contactsData.length !== 0 ? (
-                    <DataTableComponents data={contactsData}/>
+                    <DataTableComponents
+                      data={contactsData}
+                      editFunction={editFunction}
+                    />
                   ) : (
                     <div className=" h-[600px] bg-white shadow rounded-lg flex flex-col gap-y-3 justify-center items-center">
                       <EmptyComponents />
@@ -60,7 +76,7 @@ const HomePages = () => {
                     </div>
                   )}
                 </div>
-                <SheetContent>
+                <SheetContent onClose={() =>handleEditForm()}>
                   <SheetHeader>
                     <SheetTitle className="font-headings text-basic font-semibold">
                       Contact Information
@@ -71,7 +87,7 @@ const HomePages = () => {
                     </SheetDescription>
                   </SheetHeader>
                   <div className="grid gap-4 py-4">
-                    <FormComponents />
+                    <FormComponents editData={editData} handleEditForm={handleEditForm} />
                   </div>
                 </SheetContent>
               </div>

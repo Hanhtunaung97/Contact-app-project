@@ -12,7 +12,8 @@ import { CiEdit, CiTrash } from "react-icons/ci";
 import SweetAlert2 from "react-sweetalert2";
 import { toast } from "sonner";
 import { useDeleteContactMutation } from "../../store/services/Endpoints/contact.Endpoints";
-const DataTableComponents = ({ data }) => {
+import { SheetTrigger } from "@/components/ui/sheet";
+const DataTableComponents = ({ data, editFunction }) => {
   const [delFun, delData] = useDeleteContactMutation();
   const [swalProps, setSwalProps] = useState({});
   const handleDelete = async (id) => {
@@ -41,7 +42,6 @@ const DataTableComponents = ({ data }) => {
         });
         toast.success("You did it.", {
           description: "Your contact have been successfully deleted !",
-          position: "bottom-left",
           richColors: true,
           dismissible: true,
           duration: 3000,
@@ -52,6 +52,10 @@ const DataTableComponents = ({ data }) => {
         });
       },
     });
+  };
+  const handleEditBtn = (id) => {
+    console.log("u edit", id);
+    editFunction(id);
   };
   return (
     <div className=" bg-white p-5 shadow rounded-lg">
@@ -84,9 +88,14 @@ const DataTableComponents = ({ data }) => {
               </TableCell>
               <TableCell className="font-light">{el.address}</TableCell>
               <TableCell className=" flex justify-end items-center gap-x-3">
-                <button className=" p-1 rounded-full border border-basic bg-basic hover:bg-teal-50 group duration-200 active:scale-110">
-                  <CiEdit className=" w-5 h-5 stroke-1 text-teal-50 group-hover:text-basic pointer-events-none" />
-                </button>
+                <SheetTrigger asChild>
+                  <button
+                    onClick={() => handleEditBtn(el.id)}
+                    className=" p-1 rounded-full border border-basic bg-basic hover:bg-teal-50 group duration-200 active:scale-110"
+                  >
+                    <CiEdit className=" w-5 h-5 stroke-1 text-teal-50 group-hover:text-basic pointer-events-none" />
+                  </button>
+                </SheetTrigger>
                 <button
                   onClick={() => handleDeleteBtn(el.id)}
                   className=" p-1 rounded-full border border-danger bg-rose-50 hover:bg-danger group duration-200 active:scale-110"
