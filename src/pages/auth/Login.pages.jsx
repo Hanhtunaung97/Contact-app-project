@@ -79,7 +79,7 @@ const LoginPages = () => {
                 <Toaster />
               </>
             ) : (
-              <Card className=" basis-1/2">
+              <Card className="block w-full md:basis-1/2">
                 <CardHeader className="flex-row justify-between items-center text-basic">
                   <CardTitle>Sign In</CardTitle>
                   <CardDescription className=" text-basic  select-none">
