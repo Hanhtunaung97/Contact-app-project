@@ -11,6 +11,8 @@
 ## <a name="tech-stack">⚙️ Tech Stack</a>
 
 - React.js
+- Redux-toolkit
+- RTK-Query
 - React-Router-Dom
 - React-SweetAlert2
 - Vite
